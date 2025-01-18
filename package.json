@@ -166,6 +166,7 @@
                             "Lathe",
                             "3D Printer",
                             "Swiss",
+                            "Citizen Swiss",
                             "Laser",
                             "EDM"
                         ],
@@ -174,6 +175,7 @@
                             "Configure G-Code Extension for CNC Lathe",
                             "Configure G-Code Extension for 3D Printers",
                             "Configure G-Code Extension for Swiss-style Lathes",
+                            "Configure G-Code Extension for Citizen Swiss-style Lathes",
                             "Configure G-Code Extension for Laser Machine Tools",
                             "Configure G-Code Extension for EDM"
                         ],

@@ -188,6 +188,7 @@ export class CalcApp extends GWebviewApp {
                 break;
 
             case MachineTypes.Lathe:
+            case MachineTypes.CitizenSwiss:
             case MachineTypes.Swiss:
                 {
                     // Focus Speeds Tab

@@ -60,6 +60,7 @@ export enum MachineTypes {
     Laser = 'laser',
     Printer = 'printer',
     Swiss = 'swiss',
+    CitizenSwiss = 'citizenswiss'
 }
 
 export type MachineType = MachineTypes;

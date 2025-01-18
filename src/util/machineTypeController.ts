@@ -65,6 +65,10 @@ export class MachineTypeController implements Disposable {
                 this._machineType = MachineTypes.Swiss;
                 break;
 
+            case 'Citizen Swiss':
+                this._machineType = MachineTypes.CitizenSwiss;
+                break;
+
             case 'Laser':
                 this._machineType = MachineTypes.Laser;
                 break;

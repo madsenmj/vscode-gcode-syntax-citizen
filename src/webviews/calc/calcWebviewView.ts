@@ -36,7 +36,8 @@ export class CalcWebviewView extends GWebviewView {
             if (
                 this._machineType === MachineTypes.Mill ||
                 this._machineType === MachineTypes.Lathe ||
-                this._machineType === MachineTypes.Swiss
+                this._machineType === MachineTypes.Swiss ||
+                this._machineType === MachineTypes.CitizenSwiss
             ) {
                 void Control.setContext(Contexts.CalcWebviewViewEnabled, true);
             } else {
@@ -153,7 +154,8 @@ export class CalcWebviewView extends GWebviewView {
         if (
             this._machineType === MachineTypes.Mill ||
             this._machineType === MachineTypes.Lathe ||
-            this._machineType === MachineTypes.Swiss
+            this._machineType === MachineTypes.Swiss ||
+            this._machineType === MachineTypes.CitizenSwiss
         ) {
             if (this._enabled) {
                 void Control.setContext(Contexts.CalcWebviewViewEnabled, true);
