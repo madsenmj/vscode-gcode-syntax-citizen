@@ -6,12 +6,13 @@
 
 import { GWebviewApp } from '../shared/gWebviewApp';
 import { WebviewMsg } from '../../webviewMsg.types';
-import { calcBootstrap, ICalcDom, MachineType, MachineTypes, TCalcDom, Units } from './calc.types';
+import { calcBootstrap, ICalcDom, TCalcDom, Units } from './calc.types';
+import { SyntaxMachineType, SyntaxMachineTypes } from '../../../util/machine.types';
 
 export class CalcApp extends GWebviewApp {
     private _calcDom: ICalcDom = {};
     private _clearBtns: NodeListOf<HTMLElement> | undefined;
-    private _machineType: MachineType = MachineTypes.Mill;
+    private _machineType: SyntaxMachineType = SyntaxMachineTypes.Mill;
     private _units: Units = Units.Default;
 
     constructor() {
@@ -111,7 +112,7 @@ export class CalcApp extends GWebviewApp {
 
             case 'changeMachineType':
                 {
-                    this._machineType = message.payload as MachineType;
+                    this._machineType = message.payload as SyntaxMachineType;
                     this._updateMachineType();
                 }
                 break;
@@ -132,7 +133,7 @@ export class CalcApp extends GWebviewApp {
         this._clearFields();
 
         switch (this._machineType) {
-            case MachineTypes.Mill:
+            case SyntaxMachineTypes.Mill:
                 {
                     // Focus Speeds Tab
                     const speedsTab = document.getElementById('tab-1') as HTMLElement;
@@ -187,9 +188,9 @@ export class CalcApp extends GWebviewApp {
                 }
                 break;
 
-            case MachineTypes.Lathe:
-            case MachineTypes.CitizenSwiss:
-            case MachineTypes.Swiss:
+            case SyntaxMachineTypes.Lathe:
+            case SyntaxMachineTypes.CitizenSwiss:
+            case SyntaxMachineTypes.Swiss:
                 {
                     // Focus Speeds Tab
                     const speedsTab = document.getElementById('tab-1') as HTMLElement;
@@ -512,7 +513,11 @@ export class CalcApp extends GWebviewApp {
     private _calcMRR(axialDepth: number, radialDepth: number, feedRate: number): number | undefined {
         const mrr = feedRate * radialDepth * axialDepth;
 
-        if (this._machineType === MachineTypes.Lathe || this._machineType === MachineTypes.Swiss) {
+        if (
+            this._machineType === SyntaxMachineTypes.Lathe ||
+            this._machineType === SyntaxMachineTypes.Swiss ||
+            this._machineType === SyntaxMachineTypes.CitizenSwiss
+        ) {
             if (this._units === Units.MM) {
                 return mrr;
             } else {

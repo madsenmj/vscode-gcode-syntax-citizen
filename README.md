@@ -21,7 +21,7 @@ Additionally, by editing your G-Code inside of VSCode, you can take advantage of
 
 ![Screenshot](https://raw.githubusercontent.com/appliedengdesign/vscode-gcode-syntax/master/images/screenshot.png)
 
->VSCode or [Visual Studio Code](https://code.visualstudio.com) is a FREE (as in beer), open source application for editing code of all kinds of programming languages. To make it even better, there is a great [marketplace](https://marketplace.visualstudio.com/VSCode) where you can download and add **extensions** to the application to support other languages, add features and more.
+> VSCode or [Visual Studio Code](https://code.visualstudio.com) is a FREE (as in beer), open source application for editing code of all kinds of programming languages. To make it even better, there is a great [marketplace](https://marketplace.visualstudio.com/VSCode) where you can download and add **extensions** to the application to support other languages, add features and more.
 
 ## Support VSCode-G-Code-Syntax
 
@@ -103,8 +103,8 @@ Tree view is enabled by default and can be access from the G icon on the activit
 
 G-Code Syntax is customizable and provides many configuration settings to allow the personalization of almost all features.
 
-| Name                                 | Description                                                                                 |
-| ------------------------------------ | ------------------------------------------------------------------------------------------- |
+| Name                                      | Description                                                                            |
+| ----------------------------------------- | -------------------------------------------------------------------------------------- |
 | `gcode.general.hovers.enabled`            | Enable or Disable the hovers to show G-Code information                                |
 | `gcode.general.machineType`               | Choose the machine type for extension (Mill is default)                                |
 | `gcode.general.statusBars.enabled`        | Enable or Disable the G-Code status bars                                               |
@@ -165,10 +165,16 @@ For more information on contributing, please refer to the [CONTRIBUTING](https:/
 
 ## About Applied Eng & Design
 
-We are a full service engineering and design firm, specializing in CAD/CAM, CNC milling, rapid prototyping, training and more.  We also like to dabble in Arudino / RaspberryPi projects, electronics, drones and robotics projects! Subscribe to our YouTube channel for videos on our projects, screencast tutorials, and more!
+We are a full service engineering and design firm, specializing in CAD/CAM, CNC milling, rapid prototyping, training and more. We also like to dabble in Arudino / RaspberryPi projects, electronics, drones and robotics projects! Subscribe to our YouTube channel for videos on our projects, screencast tutorials, and more!
 
 Follow us on [Twitter](https://twitter.com/appliedengdes) & [Instagram](https://instagram.com/appliedengdes), and like our [Facebook Page](https://facebook.com/appliedengdesign)!
 
 ## License
 
 This extension is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+
+## TODOs
+
+1. Finish updating the M and G codes in the gcode-reference repo
+2. Figure out how to make children in the hierarchy - set up to have $1/$2/$3 as parents, then each tool change as a parent
+3. Update the G/M codes in this repo to match the Citizen format

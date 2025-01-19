@@ -1,10 +1,14 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* ---------------------------------------------------------------------------------------------
  *  Copyright (c) Applied Eng & Design All rights reserved.
  *  Licensed under the MIT License. See License.md in the project root for license information.
  * -------------------------------------------------------------------------------------------- */
 'use strict';
 
-import { MachineType, MachineTypes } from '@appliedengdesign/gcode-reference';
+import { SyntaxMachineType, SyntaxMachineTypes } from '../../util/machine.types';
 import { TextDecoder } from 'util';
 import { commands, ConfigurationChangeEvent, Disposable, Uri, Webview, workspace } from 'vscode';
 import { Control } from '../../control';
@@ -18,7 +22,7 @@ import { WebviewMsg } from '../webviewMsg.types';
 
 export class CalcWebviewView extends GWebviewView {
     private _shortId: string;
-    private _machineType: MachineType;
+    private _machineType: SyntaxMachineType;
 
     constructor() {
         const title = `${WebviewTitles.CalcWebviewView} (${
@@ -34,10 +38,10 @@ export class CalcWebviewView extends GWebviewView {
             Logger.log('Loading Calculator...');
 
             if (
-                this._machineType === MachineTypes.Mill ||
-                this._machineType === MachineTypes.Lathe ||
-                this._machineType === MachineTypes.Swiss ||
-                this._machineType === MachineTypes.CitizenSwiss
+                this._machineType === SyntaxMachineTypes.Mill ||
+                this._machineType === SyntaxMachineTypes.Lathe ||
+                this._machineType === SyntaxMachineTypes.Swiss ||
+                this._machineType === SyntaxMachineTypes.CitizenSwiss
             ) {
                 void Control.setContext(Contexts.CalcWebviewViewEnabled, true);
             } else {
@@ -148,14 +152,14 @@ export class CalcWebviewView extends GWebviewView {
         }
     }
 
-    private async _changeMachineType(e: MachineType) {
+    private async _changeMachineType(e: SyntaxMachineType) {
         this._machineType = e;
 
         if (
-            this._machineType === MachineTypes.Mill ||
-            this._machineType === MachineTypes.Lathe ||
-            this._machineType === MachineTypes.Swiss ||
-            this._machineType === MachineTypes.CitizenSwiss
+            this._machineType === SyntaxMachineTypes.Mill ||
+            this._machineType === SyntaxMachineTypes.Lathe ||
+            this._machineType === SyntaxMachineTypes.Swiss ||
+            this._machineType === SyntaxMachineTypes.CitizenSwiss
         ) {
             if (this._enabled) {
                 void Control.setContext(Contexts.CalcWebviewViewEnabled, true);

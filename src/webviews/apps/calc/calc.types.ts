@@ -4,6 +4,8 @@
  * -------------------------------------------------------------------------------------------- */
 'use strict';
 
+import { SyntaxMachineTypes } from '../../../util/machine.types';
+
 export interface ICalcDom {
     rpm?: {
         btn: HTMLElement;
@@ -53,18 +55,6 @@ export interface ICalcDom {
 
 export type TCalcDom = ICalcDom[keyof ICalcDom];
 
-export enum MachineTypes {
-    EDM = 'edm',
-    Mill = 'mill',
-    Lathe = 'lathe',
-    Laser = 'laser',
-    Printer = 'printer',
-    Swiss = 'swiss',
-    CitizenSwiss = 'citizenswiss'
-}
-
-export type MachineType = MachineTypes;
-
 export enum Units {
     Inch = 'Inch',
     MM = 'Metric',
@@ -72,6 +62,6 @@ export enum Units {
 }
 
 export interface calcBootstrap {
-    machineType: MachineTypes;
+    machineType: SyntaxMachineTypes;
     units: Units;
 }

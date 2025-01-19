@@ -8,7 +8,7 @@
 import { StatusBarAlignment } from 'vscode';
 import { GCodeUnits } from '../constants';
 import { LineNumbererOptions, LineNumberFrequency } from '../lineNumberer';
-import { MachineType, MachineTypes } from '@appliedengdesign/gcode-reference';
+import { SyntaxMachineType, SyntaxMachineTypes } from '../machine.types';
 
 export enum TraceLevel {
     Silent = 'silent',
@@ -20,8 +20,7 @@ export enum TraceLevel {
 
 export interface GCodeConfiguration {
     general: {
-        machineType: MachineType;
-
+        machineType: SyntaxMachineType;
         hovers: {
             enabled: boolean;
         };
@@ -59,7 +58,7 @@ export interface GCodeConfiguration {
 
 export const defaults: GCodeConfiguration = {
     general: {
-        machineType: MachineTypes.Mill,
+        machineType: SyntaxMachineTypes.Mill,
         hovers: {
             enabled: true,
         },
