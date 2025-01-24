@@ -12,7 +12,7 @@
     },
     "copyright": "Copyright (c) 2022 Applied Eng. & Design / Mike Centola",
     "engines": {
-        "vscode": "^1.73.0"
+        "vscode": "^1.74.0"
     },
     "categories": [
         "Programming Languages",
@@ -60,7 +60,8 @@
         "onLanguage:gcode",
         "onView:gcode.gcodeTree",
         "onView:gcode.gcodeStats",
-        "onView:gcode.webviews.calc"
+        "onView:gcode.webviews.calc",
+        "onStartupFinished"
     ],
     "capabilities": {
         "virtualWorkspaces": true
@@ -595,13 +596,11 @@
         "lint": "eslint --ext .ts src/**/*.ts --cache",
         "pack": "vsce package",
         "package": "npm run clean && webpack --mode production --devtool hidden-source-map",
-        "pretest": "npm run compile",
         "pretty": "prettier --config .prettierrc --loglevel warn .",
         "pub": "vsce publish",
         "refresh": "npm run clean && shx rm -rf ./node_modules && npm install",
         "test": "node ./out/test/runTests.js",
         "test:unit": "SET TS_NODE_PROJECT=./tsconfig.tests.json && mocha -r ts-node/register test/unit/*.test.ts",
-        "vscode:prepublish": "npm run bundle",
         "watch": "webpack --watch -mode deveopment"
     },
     "devDependencies": {
@@ -638,7 +637,7 @@
         "webpack-cli": "^4.10.0"
     },
     "dependencies": {
-        "@appliedengdesign/gcode-reference": "file:../gcode-reference-citizen",
+        "gcode-reference-citizen": "file:../gcode-reference-citizen",
         "@vscode/webview-ui-toolkit": "^1.0.0"
     }
 }

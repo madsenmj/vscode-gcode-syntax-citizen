@@ -1,7 +1,3 @@
-[![Version](https://vsmarketplacebadge.apphb.com/version/appliedengdesign.vscode-gcode-syntax.svg)](https://marketplace.visualstudio.com/items?itemName=appliedengdesign.vscode-gcode-syntax)
-[![Installs](https://vsmarketplacebadge.apphb.com/installs-short/appliedengdesign.vscode-gcode-syntax.svg)](https://marketplace.visualstudio.com/items?itemName=appliedengdesign.vscode-gcode-syntax)
-[![Rating](https://vsmarketplacebadge.apphb.com/rating/appliedengdesign.vscode-gcode-syntax.svg)](https://marketplace.visualstudio.com/items?itemName=appliedengdesign.vscode-gcode-syntax)
-
 [![GitHub Issues](https://badgen.net/github/open-issues/appliedengdesign/vscode-gcode-syntax)](https://github.com/appliedengdesign/vscode-gcode-syntax/issues)
 ![Github Stars](https://badgen.net/github/stars/appliedengdesign/vscode-gcode-syntax)
 ![Github Last Commit](https://badgen.net/github/last-commit/appliedengdesign/vscode-gcode-syntax/)
