@@ -640,9 +640,9 @@ export class GCodeTreeParser {
         const len = line.length;
         const comments = getComments(line);
         const toolNumber = this.getToolNumber(line);
-        const node: NavTreeNode = new NavTreeNode(`Tool ${toolNumber}`, TreeItemCollapsibleState.Expanded);
+        const node: NavTreeNode = new NavTreeNode(`Tool ${toolNumber}: ${comments}`, TreeItemCollapsibleState.Expanded);
         node.tooltip = `[T${toolNumber}] ${comments}`;
-        node.setIcon(IconType.Rapid);
+        node.setIcon(IconType.ToolChange);
         node.command = {
             command: 'gcode.views.navTree.select',
             title: '',
