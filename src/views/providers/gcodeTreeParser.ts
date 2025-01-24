@@ -12,7 +12,7 @@ import { NavTreeNode } from '../nodes/navTreeNode';
 import { IconType } from '../nodes/nodes';
 import { stripComments } from './helpers';
 import { Control } from '../../control';
-import { SyntaxMachineType, SyntaxMachineTypes } from '../../util/machine.types';
+import { SyntaxMachineTypes } from '../../util/machine.types';
 
 export class GCodeTreeParser {
     private blocks: NavTreeNode[];

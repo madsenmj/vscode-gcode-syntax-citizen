@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* ---------------------------------------------------------------------------------------------
  *  Copyright (c) Applied Eng & Design All rights reserved.
  *  Licensed under the MIT License. See License.md in the project root for license information.
@@ -37,6 +38,17 @@ export class GCodeHoverProvider implements HoverProvider {
             return;
         }
 
-        return new MarkdownString(`**${text}**: `).appendMarkdown(code.shortDesc ?? '');
+        let markdown = code.shortDesc;
+        if (code.desc) {
+            markdown += `\n\n${code.desc}\n`;
+        }
+        if (code.parameters) {
+            markdown += '\n';
+            for (const key in code.parameters) {
+                markdown += `  * **${key}**: ${code.parameters[key].shortDesc}\n`;
+            }
+        }
+
+        return new MarkdownString(`**${text}**: `).appendMarkdown(markdown ?? '');
     }
 }

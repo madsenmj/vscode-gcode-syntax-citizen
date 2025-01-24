@@ -81,4 +81,9 @@ Please follow all instructions in the [PR template](.github/PULL_REQUEST_TEMPLAT
 - [GitHub Docs](http://help.github.com/)
 - [GitHub Pull Request Docs](http://help.github.com/send-pull-requests/)
 - [Successful Git Branching Model](http://nvie.com/posts/a-successful-git-branching-model/)
-  
+
+## Local Package Updating
+
+1. Update any changes to the `gcode-reference` package and run `npm run prepack` to package files into the `dist` folder
+2. Run `npm install` to pull in the local changes to that package
+3. Install `vcse`: `npm install -g @vscode/vsce` and then run `vsce package` to create a local package that can be installed following the [documentation here](https://code.visualstudio.com/api/working-with-extensions/publishing-extension#packaging-extensions)
