@@ -602,7 +602,7 @@ export class GCodeTreeParser {
 
         // Deal with Overall Control Lines
         if (line === '$1') {
-            node = new NavTreeNode('Main Spindle', TreeItemCollapsibleState.Collapsed);
+            node = new NavTreeNode('Main Spindle', TreeItemCollapsibleState.Expanded);
             node.tooltip = 'Main Spindle';
             node.setIcon(IconType.Drill);
             node.command = {
@@ -612,7 +612,7 @@ export class GCodeTreeParser {
             };
         } else if (line === '$2') {
             const spindleTwo = this.spindleCount === 3 ? 'Turret' : 'Sub Spindle';
-            node = new NavTreeNode(spindleTwo, TreeItemCollapsibleState.Collapsed);
+            node = new NavTreeNode(spindleTwo, TreeItemCollapsibleState.Expanded);
             node.tooltip = spindleTwo;
             node.setIcon(IconType.Drill);
             node.command = {
@@ -621,7 +621,7 @@ export class GCodeTreeParser {
                 arguments: [new Range(lnum, 0, lnum, len)],
             };
         } else if (line === '$3') {
-            node = new NavTreeNode('Sub Spindle', TreeItemCollapsibleState.Collapsed);
+            node = new NavTreeNode('Sub Spindle', TreeItemCollapsibleState.Expanded);
             node.tooltip = 'Sub Spindle';
             node.setIcon(IconType.Drill);
             node.command = {
@@ -640,7 +640,7 @@ export class GCodeTreeParser {
         const len = line.length;
         const comments = getComments(line);
         const toolNumber = this.getToolNumber(line);
-        const node: NavTreeNode = new NavTreeNode(`Tool ${toolNumber}`, TreeItemCollapsibleState.Collapsed);
+        const node: NavTreeNode = new NavTreeNode(`Tool ${toolNumber}`, TreeItemCollapsibleState.Expanded);
         node.tooltip = `[T${toolNumber}] ${comments}`;
         node.setIcon(IconType.Rapid);
         node.command = {
