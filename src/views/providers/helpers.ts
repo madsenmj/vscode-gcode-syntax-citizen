@@ -7,3 +7,11 @@
 export function stripComments(line: string): string {
     return line.replace(/\s*\(.*\)\s*$|^\s*;.*/g, '');
 }
+
+export function getComments(line: string): string | undefined {
+    const matches = line.match(/.*\((.*)\).*/);
+    if (matches) {
+        return matches[1];
+    }
+    return;
+}

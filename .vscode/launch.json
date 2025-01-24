@@ -11,6 +11,8 @@
                 "--trace-warnings",
                 "--trace-depreciation",
                 "--extensionDevelopmentPath=${workspaceFolder}",
+                "${workspaceFolder}/samplenc/sample-citizen-simple.cnc",
+                "${workspaceFolder}/samplenc/sample-citizen.cnc",
                 "${workspaceFolder}/samplenc/sample-colors.nc",
                 "${workspaceFolder}/samplenc/sample-profile.nc",
                 "${workspaceFolder}/samplenc/sample-circular-pocket.nc",
@@ -43,6 +45,8 @@
                 "--trace-depreciation",
                 "--trace-warnings",
                 "--extensionDevelopmentPath=${workspaceFolder}",
+                "${workspaceFolder}/samplenc/sample-citizen-simple.cnc",
+                "${workspaceFolder}/samplenc/sample-citizen.cnc",
                 "${workspaceFolder}/samplenc/sample-colors.nc",
                 "${workspaceFolder}/samplenc/sample-profile.nc",
                 "${workspaceFolder}/samplenc/sample-circular-pocket.nc"
@@ -74,6 +78,8 @@
                 "--trace-warnings",
                 "--trace-depreciation",
                 "--extensionDevelopmentPath=${workspaceFolder}",
+                "${workspaceFolder}/samplenc/sample-citizen-simple.cnc",
+                "${workspaceFolder}/samplenc/sample-citizen.cnc",
                 "${workspaceFolder}/samplenc/sample-colors.nc",
                 "${workspaceFolder}/samplenc/sample-profile.nc",
                 "${workspaceFolder}/samplenc/sample-circular-pocket.nc"
@@ -106,6 +112,8 @@
                 "--trace-depreciation",
                 "--trace-warnings",
                 "--extensionDevelopmentPath=${workspaceFolder}",
+                "${workspaceFolder}/samplenc/sample-citizen-simple.cnc",
+                "${workspaceFolder}/samplenc/sample-citizen.cnc",
                 "${workspaceFolder}/samplenc/sample-colors.nc",
                 "${workspaceFolder}/samplenc/sample-profile.nc",
                 "${workspaceFolder}/samplenc/sample-circular-pocket.nc"
@@ -137,6 +145,8 @@
                 "--trace-depreciation",
                 "--trace-warnings",
                 "--extensionDevelopmentPath=${workspaceFolder}",
+                "${workspaceFolder}/samplenc/sample-citizen-simple.cnc",
+                "${workspaceFolder}/samplenc/sample-citizen.cnc",
                 "${workspaceFolder}/samplenc/sample-colors.nc",
                 "${workspaceFolder}/samplenc/sample-profile.nc",
                 "${workspaceFolder}/samplenc/sample-circular-pocket.nc"

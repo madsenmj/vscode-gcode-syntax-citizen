@@ -68,8 +68,10 @@ export class NavTreeView extends GView<NavTreeNode> {
         return undefined;
     }
 
-    async getChildren(): Promise<NavTreeNode[]> {
-        if (this._children) {
+    async getChildren(element?: NavTreeNode): Promise<NavTreeNode[]> {
+        if (element) {
+            return element.getChildren();
+        } else if (this._children) {
             return Promise.resolve(this._children);
         } else {
             return [];

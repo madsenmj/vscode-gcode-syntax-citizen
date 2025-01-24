@@ -28,6 +28,7 @@ export const enum IconType {
     ExtSubProgram = 'extsubprog',
     LocalSub = 'localsubprog',
     Rapid = 'rapid',
+    Settings = 'settings',
     SubProgramReturn = 'subprogreturn',
     SpindleCW = 'spindlecw',
     SpindleCCW = 'spindleccw',
@@ -94,7 +95,6 @@ export abstract class ViewNode<NType extends NodeTypes = NodeTypes> extends Tree
     getChildren(): ViewNode[] | Promise<ViewNode[]> {
         return [];
     }
-
     getParent(): ViewNode | undefined {
         return this.parent;
     }

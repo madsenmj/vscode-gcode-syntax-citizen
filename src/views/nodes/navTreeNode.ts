@@ -10,8 +10,10 @@ import * as path from 'path';
 import { IconType, ViewNode } from './nodes';
 
 export class NavTreeNode extends ViewNode<NavTreeNode> {
+    _children: NavTreeNode[];
     constructor(public readonly label: string, public readonly collapsibleState: TreeItemCollapsibleState) {
         super(label);
+        this._children = [];
     }
 
     setIcon(type: IconType): void {
@@ -23,5 +25,9 @@ export class NavTreeNode extends ViewNode<NavTreeNode> {
 
     getTreeItem(): ViewNode | Promise<ViewNode> {
         return this;
+    }
+
+    getChildren(): NavTreeNode[] | Promise<NavTreeNode[]> {
+        return this._children;
     }
 }

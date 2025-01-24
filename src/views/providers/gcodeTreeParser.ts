@@ -10,15 +10,21 @@
 import { Range, TreeItemCollapsibleState } from 'vscode';
 import { NavTreeNode } from '../nodes/navTreeNode';
 import { IconType } from '../nodes/nodes';
-import { stripComments } from './helpers';
+import { getComments, stripComments } from './helpers';
 import { Control } from '../../control';
 import { SyntaxMachineTypes } from '../../util/machine.types';
 
 export class GCodeTreeParser {
     private blocks: NavTreeNode[];
+    private spindleCount: number;
 
     constructor(readonly text: string) {
-        this.blocks = this.getBlocks(text);
+        this.spindleCount = 2;
+        if (Control.machineTypeController?.machineType === SyntaxMachineTypes.CitizenSwiss) {
+            this.blocks = this.getBlocksCitizen(text);
+        } else {
+            this.blocks = this.getBlocks(text);
+        }
     }
 
     getTree(): NavTreeNode[] {
@@ -28,6 +34,11 @@ export class GCodeTreeParser {
     // Split Text into Blocks by newline or ;
     private getBlocks(text: string): NavTreeNode[] {
         let nodes: NavTreeNode[] = [];
+
+        if (text.includes('$3')) {
+            this.spindleCount = 3;
+        }
+
         const lines = text.match(/.*(?:\r\n|\r|\n)/g) || [];
 
         for (let i = 0; i < lines.length; ++i) {
@@ -36,7 +47,6 @@ export class GCodeTreeParser {
             if (line.length === 0) {
                 continue;
             }
-
             const result = this.parseLine(line, i);
             if (result.length !== 0) {
                 nodes = nodes.concat(result);
@@ -63,17 +73,13 @@ export class GCodeTreeParser {
 
         for (let i = 0; i < words.length; ++i) {
             const word = words[i];
-            if (Control.machineTypeController?.machineType === SyntaxMachineTypes.CitizenSwiss) {
-                this.parseWordCitizen(word, lnum, len, blocks, i, words);
-            } else {
-                this.parseWordDefault(word, lnum, len, blocks, i, words);
-            }
+            this.parseWord(word, lnum, len, blocks, i, words);
         }
 
         return blocks;
     }
 
-    private parseWordDefault(word: string, lnum: number, len: number, blocks: NavTreeNode[], i: number, words: any) {
+    private parseWord(word: string, lnum: number, len: number, blocks: NavTreeNode[], i: number, words: any) {
         const letter = word[0].toUpperCase();
         const argument = word.slice(1);
         let x: number;
@@ -533,7 +539,142 @@ export class GCodeTreeParser {
         return;
     }
 
-    private parseWordCitizen(word: string, lnum: number, len: number, blocks: NavTreeNode[], i: number, words: any) {
+    // Split Text into Blocks by newline or ;
+    private getBlocksCitizen(text: string): NavTreeNode[] {
+        const nodes: NavTreeNode[] = [];
+        let spindleNode: NavTreeNode = new NavTreeNode('Main Spindle', TreeItemCollapsibleState.None);
+        spindleNode._children = [];
+        let toolNode: NavTreeNode = new NavTreeNode('T200', TreeItemCollapsibleState.None);
+        toolNode._children = [];
+        let currentTool = -1;
+
+        if (text.includes('$3')) {
+            this.spindleCount = 3;
+        }
+
+        const lines = text.match(/.*(?:\r\n|\r|\n)/g) || [];
+
+        let lineNumber = 0;
+
+        while (lineNumber < lines.length) {
+            const line = lines[lineNumber].trim();
+
+            if (line.length >= 0) {
+                if (this.isSpindleLineCitizen(line)) {
+                    spindleNode = this.parseSpindleLineCitizen(line, lineNumber);
+                    nodes.push(spindleNode);
+                    currentTool = -1;
+                } else if (this.isToolLineCitizen(line)) {
+                    currentTool = this.getToolNumber(line);
+                    toolNode = this.parseToolLineCitizen(line, lineNumber, spindleNode);
+                } else {
+                    if (currentTool > 0) {
+                        this.parseLineCitizen(line, lineNumber, toolNode);
+                    } else {
+                        this.parseLineCitizen(line, lineNumber, spindleNode);
+                    }
+                }
+            }
+            lineNumber++;
+        }
+
+        return nodes;
+    }
+
+    private isSpindleLineCitizen(line: string): boolean {
+        return line.includes('$1') || line.includes('$2') || line.includes('$3');
+    }
+
+    private isToolLineCitizen(line: string): boolean {
+        return /T\d{3,}/.test(line);
+    }
+
+    private getToolNumber(line: string): number {
+        const toolNumberMatches = line.match(/T([0-9]+)\d{2}/);
+        const toolNumber = toolNumberMatches ? toolNumberMatches[1] : '-1';
+        return parseInt(toolNumber, 10);
+    }
+
+    // Parse Line for Blocks
+    private parseSpindleLineCitizen(line: string, lnum: number): NavTreeNode {
+        let node: NavTreeNode;
+        const len = line.length;
+
+        // Deal with Overall Control Lines
+        if (line === '$1') {
+            node = new NavTreeNode('Main Spindle', TreeItemCollapsibleState.Collapsed);
+            node.tooltip = 'Main Spindle';
+            node.setIcon(IconType.Drill);
+            node.command = {
+                command: 'gcode.views.navTree.select',
+                title: '',
+                arguments: [new Range(lnum, 0, lnum, len)],
+            };
+        } else if (line === '$2') {
+            const spindleTwo = this.spindleCount === 3 ? 'Turret' : 'Sub Spindle';
+            node = new NavTreeNode(spindleTwo, TreeItemCollapsibleState.Collapsed);
+            node.tooltip = spindleTwo;
+            node.setIcon(IconType.Drill);
+            node.command = {
+                command: 'gcode.views.navTree.select',
+                title: '',
+                arguments: [new Range(lnum, 0, lnum, len)],
+            };
+        } else if (line === '$3') {
+            node = new NavTreeNode('Sub Spindle', TreeItemCollapsibleState.Collapsed);
+            node.tooltip = 'Sub Spindle';
+            node.setIcon(IconType.Drill);
+            node.command = {
+                command: 'gcode.views.navTree.select',
+                title: '',
+                arguments: [new Range(lnum, 0, lnum, len)],
+            };
+        } else {
+            node = new NavTreeNode('Default', TreeItemCollapsibleState.None);
+        }
+        node._children = [];
+        return node;
+    }
+
+    private parseToolLineCitizen(line: string, lnum: number, parent: NavTreeNode): NavTreeNode {
+        const len = line.length;
+        const comments = getComments(line);
+        const toolNumber = this.getToolNumber(line);
+        const node: NavTreeNode = new NavTreeNode(`Tool ${toolNumber}`, TreeItemCollapsibleState.Collapsed);
+        node.tooltip = `[T${toolNumber}] ${comments}`;
+        node.setIcon(IconType.Rapid);
+        node.command = {
+            command: 'gcode.views.navTree.select',
+            title: '',
+            arguments: [new Range(lnum, 0, lnum, len)],
+        };
+        node._children = [];
+        parent._children.push(node);
+        return node;
+    }
+
+    // Parse Line for Blocks
+    private parseLineCitizen(line: string, lnum: number, parent: NavTreeNode) {
+        const len = line.length;
+
+        // Regexp to Pull key words
+        // eslint-disable-next-line
+        const re = /((GOTO)|(IF)|(EQ)|(NE)|(LT)|(GT)|(LE)|(GE)|(DO)|(WHILE)|(END)|(AND)|(OR)|(XOR)|(SIN)|(COS)|(TAN)|(ASIN)|(ACOS)|(ATAN)|(FIX)|(FUP)|(LN)|(ROUND)|(SQRT)|(FIX)|(FUP)|(ROUND)|(ABS))|((?:\$\$)|(?:\$[a-zA-Z0-9#]*))|([a-zA-Z][0-9\+\-\.]+)|(\*[0-9]+)|([#][0-9]+)|([#][\[].+[\]])/igm;
+
+        // Strip Comments
+        line = stripComments(line);
+
+        // Get Words
+        const words = line.match(re) || [];
+
+        for (let i = 0; i < words.length; ++i) {
+            const word = words[i];
+            this.parseWordCitizen(word, lnum, len, parent, i, words);
+        }
+    }
+
+    private parseWordCitizen(word: string, lnum: number, len: number, parent: NavTreeNode, i: number, words: any) {
+        const blocks = parent._children;
         const letter = word[0].toUpperCase();
         const argument = word.slice(1);
         let x: number;
@@ -547,14 +688,13 @@ export class GCodeTreeParser {
                 case '00':
                 case '0':
                     node = new NavTreeNode('Rapid', TreeItemCollapsibleState.None);
-                    node.tooltip = '[G00] Rapid Motion Cause';
+                    node.tooltip = '[G00] Rapid Motion';
                     node.setIcon(IconType.Rapid);
                     node.command = {
                         command: 'gcode.views.navTree.select',
                         title: '',
                         arguments: [new Range(lnum, 0, lnum, len)],
                     };
-
                     blocks.push(node);
                     break;
 
@@ -613,8 +753,8 @@ export class GCodeTreeParser {
                     }
 
                     if (!(tmp = words[i + x].slice(1)).match(/\./g)) {
-                        // Milliseconds
-                        tmp = Number(tmp) / 1000;
+                        // seconds
+                        tmp = Number(tmp);
                     }
 
                     node = new NavTreeNode(`Dwell (${<number>tmp}s)`, TreeItemCollapsibleState.None);
@@ -629,11 +769,11 @@ export class GCodeTreeParser {
                     blocks.push(node);
                     break;
 
-                // Engraving
-                case '47':
-                    node = new NavTreeNode('Engraving', TreeItemCollapsibleState.None);
-                    node.tooltip = '[G47] Engraving';
-                    node.setIcon(IconType.Engraving);
+                // Coordinate Shift
+                case '50':
+                    node = new NavTreeNode('Coord Shift', TreeItemCollapsibleState.None);
+                    node.tooltip = '[G50] Coord Shift';
+                    node.setIcon(IconType.WorkOffset);
                     node.command = {
                         command: 'gcode.views.navTree.select',
                         title: '',

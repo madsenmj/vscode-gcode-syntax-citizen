@@ -92,7 +92,7 @@ export abstract class GView<TRoot extends ViewNode<NodeTypes>> implements TreeDa
         Disposable.from(...this._disposables).dispose();
     }
 
-    getTreeItem(element: ViewNode): TreeItem | Promise<TreeItem> {
+    getTreeItem(element: ViewNode): TreeItem | Thenable<ViewNode> {
         return element;
     }
 
