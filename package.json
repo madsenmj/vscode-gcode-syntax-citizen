@@ -12,7 +12,7 @@
     },
     "copyright": "Copyright (c) 2022 Applied Eng. & Design / Mike Centola",
     "engines": {
-        "vscode": "^1.74.0"
+        "vscode": "^1.73.0"
     },
     "categories": [
         "Programming Languages",
@@ -591,6 +591,7 @@
         "build:extension": "webpack --mode development --config-name extension",
         "build:webviews": "webpack --mode development --config-name webviews",
         "bundle": "npm run clean && webpack --mode production --devtool hidden-source-map",
+        "pretest": "npm run compile",
         "clean": "shx rm -rf out/* && rm -rf dist/*",
         "compile": "tsc -p ./",
         "lint": "eslint --ext .ts src/**/*.ts --cache",
@@ -608,7 +609,7 @@
         "@types/glob": "^8.0.0",
         "@types/mocha": "^10.0.0",
         "@types/node": "^18.11.9",
-        "@types/vscode": "^1.73.0",
+        "@types/vscode": "1.73.0",
         "@typescript-eslint/eslint-plugin": "^5.42.1",
         "@typescript-eslint/parser": "^5.42.1",
         "chai": "^4.3.7",
@@ -638,7 +639,7 @@
         "webpack-cli": "^4.10.0"
     },
     "dependencies": {
-        "@vscode/webview-ui-toolkit": "^1.0.0",
-        "gcode-reference-citizen": "file:../gcode-reference-citizen"
+        "@appliedengdesign/gcode-reference": "file:../gcode-reference-citizen",
+        "@vscode/webview-ui-toolkit": "^1.0.0"
     }
 }

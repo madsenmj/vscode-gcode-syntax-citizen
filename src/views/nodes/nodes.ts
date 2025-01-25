@@ -28,6 +28,7 @@ export const enum IconType {
     ExtSubProgram = 'extsubprog',
     LocalSub = 'localsubprog',
     Rapid = 'rapid',
+    Refresh = 'refresh',
     Settings = 'settings',
     SubProgramReturn = 'subprogreturn',
     SpindleCW = 'spindlecw',

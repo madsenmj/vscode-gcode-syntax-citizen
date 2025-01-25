@@ -125,6 +125,14 @@
                 {
                     "match": "(\\-)",
                     "name": "invalid.gcode"
+                },
+                {
+                    "match": "(\\!L\\d+)",
+                    "name": "invalid.gcode"
+                },
+                {
+                    "match": "(\\$\\d)",
+                    "name": "invalid.gcode"
                 }
             ]
         },
@@ -168,7 +176,7 @@
                 },
                 {
                     "match": "(?i)([Z])\\s?(\\-?\\d*\\.?\\d+\\.?|\\-?\\.?(?=[#\\[]))",
-                    "name": "invalid.gcode"
+                    "name": "string.gcode"
                 },
                 {
                     "match": "(?i)([ABC])\\s?(\\-*\\d*\\.?\\d+\\.?|\\-?\\.?(?=[#\\[]))",
@@ -203,7 +211,7 @@
                     "name": "support.constant.math.gcode"
                 },
                 {
-                    "match": "(?i)([UW])(\\-?\\d*\\.?\\d+\\.?|\\-?\\.?(?=[#\\[]]))",
+                    "match": "(?i)([UVW])(\\-?\\d*\\.?\\d+\\.?|\\-?\\.?(?=[#\\[]]))",
                     "name": "support.constant.math.gcode"
                 }
             ]

@@ -641,7 +641,7 @@ export class GCodeTreeParser {
         const comments = getComments(line);
         const toolInfo = comments ? `: ${comments}` : '';
         const toolNumber = this.getToolNumber(line);
-        const node: NavTreeNode = new NavTreeNode(`Tool ${toolNumber}${toolInfo}`, TreeItemCollapsibleState.Expanded);
+        const node: NavTreeNode = new NavTreeNode(`Tool ${toolNumber}${toolInfo}`, TreeItemCollapsibleState.Collapsed);
         node.tooltip = `[T${toolNumber}]${toolInfo}`;
         node.setIcon(IconType.ToolChange);
         node.command = {
@@ -988,7 +988,7 @@ export class GCodeTreeParser {
                     blocks.push(node);
                     break;
 
-                case 'G113':
+                case '113':
                     node = new NavTreeNode('Spindle synchronization control cancel', TreeItemCollapsibleState.None);
                     node.tooltip = '[G113] Spindle synchronization control cancel';
                     node.setIcon(IconType.Drill);
@@ -1000,7 +1000,7 @@ export class GCodeTreeParser {
 
                     blocks.push(node);
                     break;
-                case 'G114.1':
+                case '114.1':
                     node = new NavTreeNode('Spindle synchronization control', TreeItemCollapsibleState.None);
                     node.tooltip = '[G114.1] Spindle synchronization control';
                     node.setIcon(IconType.Drill);
@@ -1014,7 +1014,7 @@ export class GCodeTreeParser {
                     break;
 
                 // Main-Sub Sync
-                case 'G600':
+                case '600':
                     node = new NavTreeNode('Free pattern (machining pattern cancel)', TreeItemCollapsibleState.None);
                     node.tooltip = '[G600] Free pattern (machining pattern cancel)';
                     node.setIcon(IconType.Drill);
@@ -1027,7 +1027,7 @@ export class GCodeTreeParser {
                     blocks.push(node);
                     break;
 
-                case 'G610':
+                case '610':
                     node = new NavTreeNode('$1 single machining', TreeItemCollapsibleState.None);
                     node.tooltip = '[G610] $1 single machining';
                     node.setIcon(IconType.Drill);
@@ -1040,7 +1040,7 @@ export class GCodeTreeParser {
                     blocks.push(node);
                     break;
 
-                case 'G620':
+                case '620':
                     node = new NavTreeNode(
                         'Inner/outer diameter simultaneous machining',
                         TreeItemCollapsibleState.None,
@@ -1055,7 +1055,7 @@ export class GCodeTreeParser {
 
                     blocks.push(node);
                     break;
-                case 'G630':
+                case '630':
                     node = new NavTreeNode('Front/back parallel machining', TreeItemCollapsibleState.None);
                     node.tooltip = '[G630] Front/back parallel machining';
                     node.setIcon(IconType.Drill);
@@ -1067,7 +1067,7 @@ export class GCodeTreeParser {
 
                     blocks.push(node);
                     break;
-                case 'G650':
+                case '650':
                     node = new NavTreeNode(
                         'Pick-off, center support (Z1-Z2 superimposition)',
                         TreeItemCollapsibleState.None,
@@ -1083,7 +1083,7 @@ export class GCodeTreeParser {
                     blocks.push(node);
                     break;
 
-                case 'G660':
+                case '660':
                     node = new NavTreeNode('Front/back simultaneous machining', TreeItemCollapsibleState.None);
                     node.tooltip = '[G650] Front/back simultaneous machining';
                     node.setIcon(IconType.Drill);
@@ -1096,7 +1096,7 @@ export class GCodeTreeParser {
                     blocks.push(node);
                     break;
 
-                case 'G814':
+                case '814':
                     node = new NavTreeNode('Spindle synchronization control', TreeItemCollapsibleState.None);
                     node.tooltip = '[G814] Spindle synchronization control';
                     node.setIcon(IconType.Settings);
@@ -1109,7 +1109,7 @@ export class GCodeTreeParser {
                     blocks.push(node);
                     break;
 
-                case 'G999':
+                case '999':
                     node = new NavTreeNode('Executing the Last Part/Cycle Program', TreeItemCollapsibleState.None);
                     node.tooltip = '[G999] Executing the Last Part/Cycle Program';
                     node.setIcon(IconType.Settings);
@@ -1357,7 +1357,7 @@ export class GCodeTreeParser {
                 case '33':
                     node = new NavTreeNode('Positioning to product separation position', TreeItemCollapsibleState.None);
                     node.tooltip = 'Positioning to product separation position';
-                    node.setIcon(IconType.CoolantOn);
+                    node.setIcon(IconType.Rapid);
                     node.command = {
                         command: 'gcode.views.navTree.select',
                         title: '',
@@ -1396,7 +1396,7 @@ export class GCodeTreeParser {
                 case '56':
                     node = new NavTreeNode('Product count', TreeItemCollapsibleState.None);
                     node.tooltip = 'Product count';
-                    node.setIcon(IconType.CoolantOn);
+                    node.setIcon(IconType.Refresh);
                     node.command = {
                         command: 'gcode.views.navTree.select',
                         title: '',
