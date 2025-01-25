@@ -28,3 +28,4 @@ tsconfig**
 tsconfig.tsbuildinfo
 webpack.config*.js
 .DS_Store
+../gcode-reference-citizen/node_modules/**

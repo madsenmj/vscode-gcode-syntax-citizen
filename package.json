@@ -615,6 +615,7 @@
         "copy-webpack-plugin": "^11.0.0",
         "csp-html-webpack-plugin": "^5.1.0",
         "css-loader": "^6.7.1",
+        "esbuild": "^0.24.2",
         "eslint": "^8.27.0",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-import": "^2.26.0",
@@ -637,7 +638,7 @@
         "webpack-cli": "^4.10.0"
     },
     "dependencies": {
-        "gcode-reference-citizen": "file:../gcode-reference-citizen",
-        "@vscode/webview-ui-toolkit": "^1.0.0"
+        "@vscode/webview-ui-toolkit": "^1.0.0",
+        "gcode-reference-citizen": "file:../gcode-reference-citizen"
     }
 }

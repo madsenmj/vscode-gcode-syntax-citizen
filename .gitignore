@@ -1,6 +1,5 @@
 .eslintcache
 .vscode-test/**
-*.vsix
 dist
 images/*.ai
 node_modules
