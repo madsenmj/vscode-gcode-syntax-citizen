@@ -28,6 +28,7 @@ interface IConstants {
     readonly gcodeIcon: string;
     readonly iconsPath: string;
     readonly iconExt: string;
+    readonly jsonExt: string;
     readonly langId: string;
     readonly urls: {
         readonly changeLog: string;
@@ -49,6 +50,7 @@ export const constants: IConstants = {
     gcodeIcon: path.join(__dirname, '..', 'resources', 'icons', 'gcode.svg'),
     iconsPath: path.join(__dirname, '..', 'resources', 'icons'),
     iconExt: '.svg',
+    jsonExt: '.cncc.json',
     langId: gcode.packageJSON.contributes.languages[0].id,
     urls: {
         changeLog: 'https://github.com/appliedengdesign/vscode-gcode-syntax/blob/master/CHANGELOG.md',

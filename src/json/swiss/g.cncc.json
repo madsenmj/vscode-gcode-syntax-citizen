@@ -1,0 +1,29 @@
+{
+    "$schema": "https://appliedengdesign.github.io/cnccodes-json-schema/draft/2022-07/schema",
+    "type": "gcode",
+    "machineType": "swiss",
+    "title": "G Code Swiss Reference",
+    "description": "G-Code Listing for Swiss-style Lathe Machine Tools",
+    "codes": {
+        "G00": {
+            "category": "motion",
+            "shortDesc": "Rapid Motion Positioning",
+            "desc": "G00 is used to move the machine axes at the maximum speed. This G code is modal.",
+            "modal": true,
+            "parameters": {
+                "X": {
+                    "shortDesc": "An absolute or relative coordinate on the X axis.",
+                    "optional": true
+                },
+                "Y": {
+                    "shortDesc": "An absolute or relative coordinate on the Y axis.",
+                    "optional": true
+                },
+                "Z": {
+                    "shortDesc": "An absolute or relative coordinate on the Z axis",
+                    "optional": true
+                }
+            }
+        }
+    }
+}

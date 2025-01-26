@@ -1,0 +1,488 @@
+{
+    "$schema": "https://appliedengdesign.github.io/cnccodes-json-schema/draft/2022-07/schema",
+    "type": "gcode",
+    "machineType": "swiss",
+    "title": "G Code Citizen Swiss Reference",
+    "variant": {
+        "name": "citizen",
+        "remove": []
+    },
+    "description": "G-Code Listing for Citizen Swiss-style Lathe Machine Tools",
+    "codes": {
+        "G00": {
+            "category": "motion",
+            "shortDesc": "Rapid Motion Positioning",
+            "desc": "G00 is used to move the machine axes at the maximum speed. This G code is modal.",
+            "modal": true,
+            "parameters": {
+                "X": {
+                    "shortDesc": "An absolute coordinate on the X axis.",
+                    "optional": true
+                },
+                "Y": {
+                    "shortDesc": "An absolute coordinate on the Y axis.",
+                    "optional": true
+                },
+                "Z": {
+                    "shortDesc": "An absolute coordinate on the Z axis",
+                    "optional": true
+                },
+                "U": {
+                    "shortDesc": "A relative coordinate on the X axis.",
+                    "optional": true
+                },
+                "V": {
+                    "shortDesc": "A relative coordinate on the Y axis.",
+                    "optional": true
+                },
+                "W": {
+                    "shortDesc": "A relative coordinate on the Z axis",
+                    "optional": true
+                },
+                "C": {
+                    "shortDesc": "Absolute angle set.",
+                    "optional": true
+                },
+                "H": {
+                    "shortDesc": "Relative angle set.",
+                    "optional": true
+                }
+            }
+        },
+        "G01": {
+            "category": "motion",
+            "shortDesc": "Linear Interpolation Motion",
+            "desc": "G01 is used to move machine axes at specified feedrate.",
+            "modal": true,
+            "parameters": {
+                "X": {
+                    "shortDesc": "X-Axis motion command",
+                    "optional": true
+                },
+                "Y": {
+                    "shortDesc": "Y-Axis motion command",
+                    "optional": true
+                },
+                "Z": {
+                    "shortDesc": "Z-Axis motion command",
+                    "optional": true
+                },
+                "U": {
+                    "shortDesc": "X-Axis relative motion command",
+                    "optional": true
+                },
+                "V": {
+                    "shortDesc": "Y-Axis relative motion command",
+                    "optional": true
+                },
+                "W": {
+                    "shortDesc": "Z-Axis relative motion command",
+                    "optional": true
+                },
+                "F": {
+                    "shortDesc": "Feedrate",
+                    "optional": true
+                },
+                "C": {
+                    "shortDesc": "Absolute angle set.",
+                    "optional": true
+                },
+                "H": {
+                    "shortDesc": "Relative angle set.",
+                    "optional": true
+                }
+            }
+        },
+        "G02": {
+            "category": "motion",
+            "shortDesc": "CW Interpolation Motion",
+            "desc": "Clockwise circular arc motion.",
+            "modal": true,
+            "parameters": {
+                "I": {
+                    "shortDesc": "Distance along X Axis to center of circle",
+                    "optional": true
+                },
+                "J": {
+                    "shortDesc": "Distance along Y Axis to center of circle",
+                    "optional": true
+                },
+                "K": {
+                    "shortDesc": "Distance along Z Axis to center of circle",
+                    "optional": true
+                },
+                "R": {
+                    "shortDesc": "Radius of Circle",
+                    "optional": true
+                },
+                "X": {
+                    "shortDesc": "X-Axis motion command",
+                    "optional": true
+                },
+                "Y": {
+                    "shortDesc": "Y-Axis motion command",
+                    "optional": true
+                },
+                "Z": {
+                    "shortDesc": "Z-Axis motion command",
+                    "optional": true
+                },
+                "U": {
+                    "shortDesc": "X-Axis relative motion command",
+                    "optional": true
+                },
+                "V": {
+                    "shortDesc": "Y-Axis relative motion command",
+                    "optional": true
+                },
+                "W": {
+                    "shortDesc": "Z-Axis relative motion command",
+                    "optional": true
+                },
+                "F": {
+                    "shortDesc": "Feedrate",
+                    "optional": true
+                }
+            }
+        },
+        "G03": {
+            "category": "motion",
+            "shortDesc": "CCW Interpolation Motion",
+            "desc": "counter-Clockwise circular arc motion.",
+            "modal": true,
+            "parameters": {
+                "I": {
+                    "shortDesc": "Distance along X Axis to center of circle",
+                    "optional": true
+                },
+                "J": {
+                    "shortDesc": "Distance along Y Axis to center of circle",
+                    "optional": true
+                },
+                "K": {
+                    "shortDesc": "Distance along Z Axis to center of circle",
+                    "optional": true
+                },
+                "R": {
+                    "shortDesc": "Radius of Circle",
+                    "optional": true
+                },
+                "X": {
+                    "shortDesc": "X-Axis motion command",
+                    "optional": true
+                },
+                "Y": {
+                    "shortDesc": "Y-Axis motion command",
+                    "optional": true
+                },
+                "Z": {
+                    "shortDesc": "Z-Axis motion command",
+                    "optional": true
+                },
+                "U": {
+                    "shortDesc": "X-Axis relative motion command",
+                    "optional": true
+                },
+                "V": {
+                    "shortDesc": "Y-Axis relative motion command",
+                    "optional": true
+                },
+                "W": {
+                    "shortDesc": "Z-Axis relative motion command",
+                    "optional": true
+                },
+                "F": {
+                    "shortDesc": "Feedrate",
+                    "optional": true
+                }
+            }
+        },
+        "G04": {
+            "category": "other",
+            "shortDesc": "Dwell",
+            "desc": "G04 specifies a delay or dwell in the program. The block with G04 delays for the time specified by the P or U address code.",
+            "modal": false,
+            "parameters": {
+                "P": {
+                    "shortDesc": "The dwell time in milliseconds",
+                    "optional": true
+                },
+                "U": {
+                    "shortDesc": "The dwell time in seconds",
+                    "optional": true
+                }
+            }
+        },
+        "G12.1": {
+            "category": "other",
+            "shortDesc": "Mill Interpolation ON",
+            "desc": "Milling interpolation ON",
+            "modal": false,
+            "parameters": {
+                "D": {
+                    "shortDesc": "Selects the name of a milling virtual axis. Specify 0 to select Y axis, and specify 1 to select C axis. The default is 1(C axis).",
+                    "optional": true
+                },
+                "E=C": {
+                    "shortDesc": "Specify an axis for milling interpolation. If omitted, the axis is determined by the milling axis number specified in the basic specification parameter",
+                    "optional": true
+                }
+            }
+        },
+        "G13.1": {
+            "category": "other",
+            "shortDesc": "Mill Interpolation OFF",
+            "desc": "Milling interpolation OFF",
+            "modal": false
+        },
+        "G16": {
+            "category": "coordinate",
+            "shortDesc": "Y-Z cylindrical plane selection",
+            "modal": true
+        },
+        "G17": {
+            "category": "coordinate",
+            "shortDesc": "XY Plane Selection",
+            "desc": "Circular motion with the operator looking down on the XY table from above.",
+            "modal": true
+        },
+        "G18": {
+            "category": "coordinate",
+            "shortDesc": "XZ Plane Selection",
+            "desc": "Circular motion is defined as the motion for the operator looking from the rear of the machine toward the front control panel.",
+            "modal": true
+        },
+        "G19": {
+            "category": "coordinate",
+            "shortDesc": "YZ Plane Selection",
+            "desc": "Circular motion is defined as the motion for the operator looking across the table from the side of the machine where the control panel is mounted.",
+            "modal": true
+        },
+        "G32": {
+            "category": "motion",
+            "shortDesc": "Thread Cutting",
+            "desc": "Equal Pitch Thread Cutting and Continuous Thread Cutting",
+            "modal": true,
+            "parameters": {
+                "X": {
+                    "shortDesc": "Specify the thread cutting infeed position (absolute).",
+                    "optional": true
+                },
+                "Z": {
+                    "shortDesc": "Specify the thread cutting end position in longitudinal direction (absolute).",
+                    "optional": true
+                },
+                "U": {
+                    "shortDesc": "Specify the thread cutting infeed position (relative).",
+                    "optional": true
+                },
+                "W": {
+                    "shortDesc": "Specify the thread cutting end position in longitudinal direction (relative).",
+                    "optional": true
+                },
+                "F": {
+                    "shortDesc": "Specify the pitch (lead) in longitudinal direction.",
+                    "optional": true
+                },
+                "Q": {
+                    "shortDesc": "Enter the Q argument to specify the thread cutting start shift angle",
+                    "optional": true
+                },
+                "E": {
+                    "shortDesc": "Specify the number of threads per inch.",
+                    "optional": true
+                }
+            }
+        },
+        "G40": {
+            "category": "other",
+            "shortDesc": "Tool nose radius compensation mode Cancel",
+            "modal": false
+        },
+        "G41": {
+            "category": "other",
+            "shortDesc": "Tool nose radius compensation left mode ON",
+            "modal": false
+        },
+        "G42": {
+            "category": "other",
+            "shortDesc": "Tool nose radius compensation right mode ON",
+            "modal": false
+        },
+        "G50": {
+            "category": "motion",
+            "shortDesc": "Coordinate system setting",
+            "desc": "G50 is used set a new coordinate system. Must be set in reverse at the end of the operation",
+            "modal": true,
+            "parameters": {
+                "X": {
+                    "shortDesc": "Absolute X coordinate shift",
+                    "optional": true
+                },
+                "Y": {
+                    "shortDesc": "Absolute Y coordinate shift",
+                    "optional": true
+                },
+                "Z": {
+                    "shortDesc": "Absolute Z coordinate shift",
+                    "optional": true
+                },
+                "U": {
+                    "shortDesc": "Relative X coordinate shift",
+                    "optional": true
+                },
+                "V": {
+                    "shortDesc": "Relative Y coordinate shift",
+                    "optional": true
+                },
+                "W": {
+                    "shortDesc": "Relative Z coordinate shift",
+                    "optional": true
+                },
+                "C": {
+                    "shortDesc": "Absolute angle coordinate shift",
+                    "optional": true
+                },
+                "H": {
+                    "shortDesc": "Relative angle coordinate shift",
+                    "optional": true
+                }
+            }
+        },
+        "G83": {
+            "category": "motion",
+            "shortDesc": "Canned cycle drilling",
+            "desc": "Equal Pitch Thread Cutting and Continuous Thread Cutting",
+            "modal": true,
+            "parameters": {
+                "X": {
+                    "shortDesc": "X Coordinate of hole (absolute).",
+                    "optional": true
+                },
+                "Y": {
+                    "shortDesc": "Y Coordinate of hole (absolute).",
+                    "optional": true
+                },
+                "Z": {
+                    "shortDesc": "Depth of hole (absolute).",
+                    "optional": true
+                },
+                "U": {
+                    "shortDesc": "X Coordinate of hole (relative).",
+                    "optional": true
+                },
+                "V": {
+                    "shortDesc": "Y Coordinate of hole (relative).",
+                    "optional": true
+                },
+                "W": {
+                    "shortDesc": "Depth of hole (relative).",
+                    "optional": true
+                },
+                "F": {
+                    "shortDesc": "Feed rate",
+                    "optional": true
+                },
+                "R": {
+                    "shortDesc": "Retract value",
+                    "optional": true
+                },
+                "P": {
+                    "shortDesc": "Dwell time at bottom of hole",
+                    "optional": true
+                },
+                "Q": {
+                    "shortDesc": "Depth of each peck",
+                    "optional": true
+                }
+            }
+        },
+        "G96": {
+            "category": "other",
+            "shortDesc": "Starts constant surface speed control",
+            "modal": false,
+            "parameters": {
+                "S": {
+                    "shortDesc": "Constant surface speed",
+                    "optional": false
+                }
+            }
+        },
+        "G97": {
+            "category": "other",
+            "shortDesc": "Ends constant surface speed control",
+            "modal": false,
+            "parameters": {
+                "S": {
+                    "shortDesc": "Spindle speed after canceling the constant surface speed control mode",
+                    "optional": true
+                }
+            }
+        },
+        "G98": {
+            "category": "other",
+            "shortDesc": "inch/min (per minute feed : distance of the tool in mm per minute)",
+            "modal": false
+        },
+        "G99": {
+            "category": "other",
+            "shortDesc": "inch/rev (per revolution feed : distance of the tool in mm per spindle revolution)",
+            "modal": false
+        },
+        "G113": {
+            "category": "coordinate",
+            "shortDesc": "Spindle synchronization control cancel/Polygon machining mode OFF",
+            "modal": true
+        },
+        "G114": {
+            "category": "coordinate",
+            "shortDesc": "Polygon machining mode ON",
+            "modal": true
+        },
+        "G114.1": {
+            "category": "other",
+            "shortDesc": "Spindle synchronization control",
+            "modal": false
+        },
+        "G600": {
+            "category": "other",
+            "shortDesc": "Free pattern (machining pattern cancel)",
+            "modal": false
+        },
+        "G610": {
+            "category": "other",
+            "shortDesc": "$1 single machining",
+            "modal": false
+        },
+        "G620": {
+            "category": "other",
+            "shortDesc": "Inner/outer diameter simultaneous machining",
+            "modal": false
+        },
+        "G630": {
+            "category": "other",
+            "shortDesc": "Front/back parallel machining",
+            "modal": false
+        },
+        "G650": {
+            "category": "other",
+            "shortDesc": "Pick-off, center support (Z1-Z2 superimposition)",
+            "modal": false
+        },
+        "G660": {
+            "category": "other",
+            "shortDesc": "Front/back simultaneous machining",
+            "modal": false
+        },
+        "G814": {
+            "category": "other",
+            "shortDesc": "Spindle synchronization control",
+            "modal": false
+        },
+        "G999": {
+            "category": "other",
+            "shortDesc": "Executing the Last Part/Cycle Program (Followed by an N999)",
+            "modal": false
+        }
+    }
+}

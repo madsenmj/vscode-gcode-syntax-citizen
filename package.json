@@ -3,13 +3,22 @@
     "displayName": "G-Code Syntax",
     "shortName": "G-Code",
     "description": "Turn VSCode into a fully capable G-Code editor, including language support & more.",
-    "version": "0.7.9",
+    "version": "0.7.10",
     "license": "MIT",
     "publisher": "appliedengdesign",
     "author": {
         "name": "Mike Cetola",
         "url": "https://mikecentola.com"
     },
+    "contributors": [
+        {
+            "name": "Mike Cetola",
+            "url": "https://mikecentola.com"
+        },
+        {
+            "name": "Martin Madsen"
+        }
+    ],
     "copyright": "Copyright (c) 2022 Applied Eng. & Design / Mike Centola",
     "engines": {
         "vscode": "^1.73.0"
@@ -587,17 +596,18 @@
     },
     "scripts": {
         "analyze:bundle": "webpack --env analyzeBundle",
-        "build": "webpack --mode development",
+        "build": "webpack --mode development && npm run copyJSON",
         "build:extension": "webpack --mode development --config-name extension",
         "build:webviews": "webpack --mode development --config-name webviews",
         "bundle": "npm run clean && webpack --mode production --devtool hidden-source-map",
         "pretest": "npm run compile",
         "clean": "shx rm -rf out/* && rm -rf dist/*",
+        "copyJSON": "npx ts-node ./scripts/copyJSON.ts",
         "compile": "tsc -p ./",
         "esbuild": "node esbuild.js",
         "lint": "eslint --ext .ts src/**/*.ts --cache",
         "pack": "vsce package",
-        "package": "webpack --mode production --devtool hidden-source-map",
+        "package": "webpack --mode production --devtool hidden-source-map && npm run copyJSON",
         "pretty": "prettier --config .prettierrc --loglevel warn .",
         "pub": "vsce publish",
         "refresh": "npm run clean && shx rm -rf ./node_modules && npm install",
@@ -640,7 +650,6 @@
         "webpack-cli": "^4.10.0"
     },
     "dependencies": {
-        "@appliedengdesign/gcode-reference": "file:../gcode-reference-citizen",
         "@vscode/webview-ui-toolkit": "^1.0.0"
     }
 }

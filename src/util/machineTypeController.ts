@@ -9,7 +9,9 @@
 'use strict';
 
 import { ConfigurationChangeEvent, Disposable, Event, EventEmitter } from 'vscode';
-import { GReference, MachineTypes, Variants } from '@appliedengdesign/gcode-reference';
+import { GReference } from '../gReference';
+import { MachineTypes } from '../types/machinetypes';
+import { Variants } from '../types/variants';
 import { SyntaxMachineType, SyntaxMachineTypes } from './machine.types';
 import { configuration } from './configuration/config';
 import { Logger } from './logger';

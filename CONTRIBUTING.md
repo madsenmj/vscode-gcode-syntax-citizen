@@ -84,9 +84,8 @@ Please follow all instructions in the [PR template](.github/PULL_REQUEST_TEMPLAT
 
 ## Local Package Updating
 
-1. Update any changes to the `gcode-reference` package and run `npm run prepack` to package files into the `dist` folder
-2. Run `npm install` to pull in the local changes to that package
-3. Delete the `dist` and `out` folders
-4. Run `npm run compile`
-5. Run `npm run package`
-6. Install `vsce`: `npm install -g @vscode/vsce` and then run `vsce package` to create a local package that can be installed following the [documentation here](https://code.visualstudio.com/api/working-with-extensions/publishing-extension#packaging-extensions)
+1. Delete the `dist` and `out` folders
+2. Run `npm run compile`
+3. Run `npm run package`
+4. Run `npm run esbuild`
+5. Install `vsce`: `npm install -g @vscode/vsce` and then run `vsce package` to create a local package that can be installed following the [documentation here](https://code.visualstudio.com/api/working-with-extensions/publishing-extension#packaging-extensions)

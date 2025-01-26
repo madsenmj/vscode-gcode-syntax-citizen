@@ -1,0 +1,365 @@
+{
+    "$schema": "https://appliedengdesign.github.io/cnccodes-json-schema/draft/2022-07/schema",
+    "type": "mcode",
+    "machineType": "swiss",
+    "title": "M Code Citizen Swiss Reference",
+    "variant": {
+        "name": "citizen",
+        "remove": [
+            "M12",
+            "M13",
+            "M17",
+            "M19",
+            "M34",
+            "M35"
+        ]
+    },
+    "description": "M-Code Listing for Citize Swiss-style Lathe Machine Tools",
+    "codes": {
+        "M01": {
+            "category": "mcode",
+            "shortDesc": "Optional Program Stop"
+        },
+        "M02": {
+            "category": "mcode",
+            "shortDesc": "Cycle Stop"
+        },
+        "M03": {
+            "category": "mcode",
+            "shortDesc": "Main Spindle On (CW Rotation)",
+            "desc": "M03 starts the main spindle clockwise.",
+            "parameters": {
+                "S1": {
+                    "shortDesc": "Spindle speed.",
+                    "optional": true
+                }
+            }
+        },
+        "M04": {
+            "category": "mcode",
+            "shortDesc": "Main Spindle On (CCW Rotation)",
+            "desc": "M04 starts the main spindle counter-clockwise.",
+            "parameters": {
+                "S1": {
+                    "shortDesc": "Spindle speed.",
+                    "optional": true
+                }
+            }
+        },
+        "M05": {
+            "category": "mcode",
+            "shortDesc": "Main Spindle Stop",
+            "desc": "M05 stops the main spindle."
+        },
+        "M06": {
+            "category": "mcode",
+            "shortDesc": "Main spindle chuck close",
+            "desc": "M06 Closes the main spindle chuck."
+        },
+        "M07": {
+            "category": "mcode",
+            "shortDesc": "Main spindle chuck open",
+            "desc": "M07 Opens the main spindle chuck."
+        },
+        "M08": {
+            "category": "mcode",
+            "shortDesc": "Enable bar stock exchange program",
+            "desc": "M08 Starts the automatic material replacement program."
+        },
+        "M09": {
+            "category": "mcode",
+            "shortDesc": "Completed bar stock exchange program",
+            "desc": "M09 Completed bar stock exchange program"
+        },
+        "M10": {
+            "category": "mcode",
+            "shortDesc": "Knock-out advance"
+        },
+        "M11": {
+            "category": "mcode",
+            "shortDesc": "Knock-out retract"
+        },
+        "M15": {
+            "category": "mcode",
+            "shortDesc": "Back spindle chuck close",
+            "desc": "M15 Closes the Back spindle chuck."
+        },
+        "M16": {
+            "category": "mcode",
+            "shortDesc": "Back spindle chuck open",
+            "desc": "M16 Opens the Back spindle chuck."
+        },
+        "M18": {
+            "category": "mcode",
+            "shortDesc": "Enable main spindle C axis",
+            "parameters": {
+                "C": {
+                    "shortDesc": "Absolute angle set.",
+                    "optional": true
+                },
+                "H": {
+                    "shortDesc": "Relative angle set.",
+                    "optional": true
+                }
+            }
+        },
+        "M20": {
+            "category": "mcode",
+            "shortDesc": "Main spindle indexing cancel",
+            "desc": "Cancels main spindle indexing. In C-axis mode, the excitation of main spindle is not canceled."
+        },
+        "M23": {
+            "category": "mcode",
+            "shortDesc": "Back Spindle On (CW Rotation)",
+            "desc": "M23 starts the back spindle clockwise.",
+            "parameters": {
+                "S2": {
+                    "shortDesc": "Spindle speed.",
+                    "optional": true
+                }
+            }
+        },
+        "M24": {
+            "category": "mcode",
+            "shortDesc": "Back Spindle On (CCW Rotation)",
+            "desc": "M24 starts the back spindle counter-clockwise.",
+            "parameters": {
+                "S2": {
+                    "shortDesc": "Spindle speed.",
+                    "optional": true
+                }
+            }
+        },
+        "M25": {
+            "category": "mcode",
+            "shortDesc": "Back Spindle Stop",
+            "desc": "M25 stops the back spindle."
+        },
+        "M28": {
+            "category": "mcode",
+            "shortDesc": "Main spindle indexing",
+            "desc": "A series of spindle indexing operations."
+        },
+        "M31": {
+            "category": "mcode",
+            "shortDesc": "Work conveyor on"
+        },
+        "M33": {
+            "category": "mcode",
+            "shortDesc": "Positioning to product separation position",
+            "desc": "Performs a series of axis feed operations. Axes move to the product separation position."
+        },
+        "M48": {
+            "category": "mcode",
+            "shortDesc": "Enable back spindle C axis",
+            "parameters": {
+                "C": {
+                    "shortDesc": "Absolute angle set.",
+                    "optional": true
+                },
+                "H": {
+                    "shortDesc": "Relative angle set.",
+                    "optional": true
+                }
+            }
+        },
+        "M50": {
+            "category": "mcode",
+            "shortDesc": "Pick-off failure detect",
+            "desc": "After a workpiece is cut off, the main spindle rotates at low speed and the M50 command is executed."
+        },
+        "M51": {
+            "category": "mcode",
+            "shortDesc": "Tool breakage detection ON",
+            "desc": "Starts cut-off tool break detection.",
+            "parameters": {
+                "X": {
+                    "shortDesc": "Specify the position of X1 axis to move the tip of touch sensor.",
+                    "optional": true
+                },
+                "W": {
+                    "shortDesc": "Specify move distance",
+                    "optional": true
+                },
+                "F": {
+                    "shortDesc": "The feed rate (per minute ) of the detection axis (X axis) from the positioning point.",
+                    "optional": true
+                },
+                "D": {
+                    "shortDesc": "The feed rate (per minute) when the W argument is specified.",
+                    "optional": true
+                },
+                "E1": {
+                    "shortDesc": "When a cut-off tool break detection unit is used, it detects whether the material has been advanced to the short-cut position when new material is inserted",
+                    "optional": true
+                }
+            }
+        },
+        "M52": {
+            "category": "mcode",
+            "shortDesc": "Coolant ON"
+        },
+        "M53": {
+            "category": "mcode",
+            "shortDesc": "Coolant OFF"
+        },
+        "M54": {
+            "category": "mcode",
+            "shortDesc": "Turn off the bar loader torque."
+        },
+        "M55": {
+            "category": "mcode",
+            "shortDesc": "Start bar loader operation"
+        },
+        "M56": {
+            "category": "mcode",
+            "shortDesc": "Product count"
+        },
+        "M72": {
+            "category": "mcode",
+            "shortDesc": "Back spindle air blow ON"
+        },
+        "M73": {
+            "category": "mcode",
+            "shortDesc": "Back spindle air blow OFF"
+        },
+        "M77": {
+            "category": "mcode",
+            "shortDesc": "Wait until spindle synchronization is completed."
+        },
+        "M80": {
+            "category": "mcode",
+            "shortDesc": "Rotary tool on gang tool post forward rotation",
+            "parameters": {
+                "S3": {
+                    "shortDesc": "Spindle speed.",
+                    "optional": true
+                }
+            }
+        },
+        "M81": {
+            "category": "mcode",
+            "shortDesc": "Rotary tool on gang tool post reverse rotation",
+            "parameters": {
+                "S3": {
+                    "shortDesc": "Spindle speed.",
+                    "optional": true
+                }
+            }
+        },
+        "M82": {
+            "category": "mcode",
+            "shortDesc": "Rotary tool on gang tool post stops rotation"
+        },
+        "M83": {
+            "category": "mcode",
+            "shortDesc": "Front rotary tool on opposite tool post forward rotation",
+            "parameters": {
+                "S4": {
+                    "shortDesc": "Spindle speed.",
+                    "optional": true
+                }
+            }
+        },
+        "M84": {
+            "category": "mcode",
+            "shortDesc": "Front rotary tool on opposite tool post reverse rotation",
+            "parameters": {
+                "S4": {
+                    "shortDesc": "Spindle speed.",
+                    "optional": true
+                }
+            }
+        },
+        "M85": {
+            "category": "mcode",
+            "shortDesc": "Front rotary tool on opposite tool post stops rotation"
+        },
+        "M86": {
+            "category": "mcode",
+            "shortDesc": "Cutting start interlock enabled"
+        },
+        "M87": {
+            "category": "mcode",
+            "shortDesc": "Cutting start interlock disabled"
+        },
+        "M88": {
+            "category": "mcode",
+            "shortDesc": "Interference check OFF"
+        },
+        "M89": {
+            "category": "mcode",
+            "shortDesc": "Interference check ON"
+        },
+        "M92": {
+            "category": "mcode",
+            "shortDesc": "Error detect ON"
+        },
+        "M93": {
+            "category": "mcode",
+            "shortDesc": "Error detect OFF"
+        },
+        "M94": {
+            "category": "mcode",
+            "shortDesc": "Back spindle speed fluctuation detection ON"
+        },
+        "M95": {
+            "category": "mcode",
+            "shortDesc": "Back spindle speed fluctuation detection OFF"
+        },
+        "M96": {
+            "category": "mcode",
+            "shortDesc": "Main spindle speed fluctuation detection ON"
+        },
+        "M97": {
+            "category": "mcode",
+            "shortDesc": "Main spindle speed fluctuation detection OFF"
+        },
+        "M98": {
+            "category": "mcode",
+            "shortDesc": "Sub-Program Call",
+            "parameters": {
+                "P": {
+                    "shortDesc": "Program number of the subprogram to be called",
+                    "optional": false
+                },
+                "H": {
+                    "shortDesc": "Sequence number of the subprogram to be called",
+                    "optional": true
+                },
+                "L": {
+                    "shortDesc": "The number of times (1 to 9999) the subprogram is to be repeated. (If omitted, L1 is assumed.)",
+                    "optional": true
+                },
+                "D2": {
+                    "shortDesc": "Specify this when calling a program stored in the compact flash card",
+                    "optional": true
+                }
+            }
+        },
+        "M180": {
+            "category": "mcode",
+            "shortDesc": "Back Rotary tool forward rotation",
+            "parameters": {
+                "S5": {
+                    "shortDesc": "Spindle speed.",
+                    "optional": true
+                }
+            }
+        },
+        "M181": {
+            "category": "mcode",
+            "shortDesc": "Back Rotary tool reverse rotation",
+            "parameters": {
+                "S5": {
+                    "shortDesc": "Spindle speed.",
+                    "optional": true
+                }
+            }
+        },
+        "M182": {
+            "category": "mcode",
+            "shortDesc": "Back Rotary tool stops rotation"
+        }
+    }
+}
