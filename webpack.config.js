@@ -64,7 +64,7 @@ function getExtensionConfig(mode, env) {
 
         externals: {
             vscode: 'commonjs vscode',
-            '@appliedengdesign/gcode-reference': '../gcode-reference-citizen',
+            '@appliedengdesign/gcode-reference': path.resolve(__dirname, '../gcode-reference-citizen'),
         },
 
         resolve: {
