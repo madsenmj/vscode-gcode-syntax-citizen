@@ -168,9 +168,3 @@ Follow us on [Twitter](https://twitter.com/appliedengdes) & [Instagram](https://
 ## License
 
 This extension is licensed under the [MIT License](https://opensource.org/licenses/MIT).
-
-## TODOs
-
-1. Finish updating the M and G codes in the gcode-reference repo
-2. Figure out how to make children in the hierarchy - set up to have $1/$2/$3 as parents, then each tool change as a parent
-3. Update the G/M codes in this repo to match the Citizen format
