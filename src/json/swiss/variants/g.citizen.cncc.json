@@ -309,6 +309,16 @@
             "shortDesc": "Tool nose radius compensation right mode ON",
             "modal": false
         },
+        "G43": {
+            "category": "other",
+            "shortDesc": "Back spindle feed per revolution mode OFF",
+            "modal": false
+        },
+        "G44": {
+            "category": "other",
+            "shortDesc": "Back spindle feed per revolution mode ON",
+            "modal": false
+        },
         "G50": {
             "category": "motion",
             "shortDesc": "Coordinate system setting",

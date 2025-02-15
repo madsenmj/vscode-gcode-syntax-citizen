@@ -18,7 +18,8 @@ import { Control } from '../control';
 
 export class GCodeHoverProvider implements HoverProvider {
     provideHover(document: TextDocument, position: Position, _token: CancellationToken): ProviderResult<Hover> {
-        const range = document.getWordRangeAtPosition(position);
+        const pattern = new RegExp('[A-Z][^A-Z ]+');
+        const range = document.getWordRangeAtPosition(position, pattern);
         const text = document.getText(range);
 
         const def = this.lookup(text);
