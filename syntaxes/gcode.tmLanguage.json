@@ -71,7 +71,7 @@
                     "name": "keyword.control.gcode"
                 },
                 {
-                    "match": "(?i)(DO\\s?\\d*|WHILE|WH|END|IF|THEN|ELSE|ENDIF)",
+                    "match": "(?i)(DO\\s?\\d*|WHILE|WH|END\\s?\\d*|IF|THEN|ELSE|ENDIF)",
                     "name": "keyword.control.gcode"
                 },
                 {
