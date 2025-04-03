@@ -95,6 +95,12 @@ export function activate(context: ExtensionContext) {
         check_gotoHasNumber(rangesToDecorate);
         check_gotoNumbers(rangesToDecorate);
         check_g23HaveRadius(rangesToDecorate);
+        check_ifHasGoto(rangesToDecorate);
+        check_whileHasDo(rangesToDecorate);
+        check_invalidComparitor(rangesToDecorate);
+        check_gFollowedByDirection(rangesToDecorate);
+        check_missingGCode(rangesToDecorate);
+        check_doNumbers(rangesToDecorate);
         activeEditor.setDecorations(decorationType, rangesToDecorate);
     }
 
@@ -111,8 +117,38 @@ export function activate(context: ExtensionContext) {
     }
 
     function check_g23HaveRadius(rangesToDecorate: vscode.DecorationOptions[]) {
-        const regex = /(G0?[23][^R]*(\(|$))/g;
+        const regex = /(G0?[23][^0-9] ?[^R]*(\(|$))/g;
         const hoverMessage = 'G2/3 Missing Radius';
+        genericCheck(regex, hoverMessage, rangesToDecorate);
+    }
+
+    function check_ifHasGoto(rangesToDecorate: vscode.DecorationOptions[]) {
+        const regex = /IF\[.*\] ?(?!GOTO)(?:\(|$)/gm;
+        const hoverMessage = 'IF statement missing GOTO';
+        genericCheck(regex, hoverMessage, rangesToDecorate);
+    }
+
+    function check_whileHasDo(rangesToDecorate: vscode.DecorationOptions[]) {
+        const regex = /WHILE\[.*\] ?(?!DO)(?:\(|$)/gm;
+        const hoverMessage = 'WHILE statement missing DO';
+        genericCheck(regex, hoverMessage, rangesToDecorate);
+    }
+
+    function check_invalidComparitor(rangesToDecorate: vscode.DecorationOptions[]) {
+        const regex = /(?:(?:IF)|(?:WHILE))\[(?!.*?(GT|LT|GE|LE|EQ|NE)).+\]/g;
+        const hoverMessage = 'Invalid comparitor in statment';
+        genericCheck(regex, hoverMessage, rangesToDecorate);
+    }
+
+    function check_gFollowedByDirection(rangesToDecorate: vscode.DecorationOptions[]) {
+        const regex = /G(?:32|83|87|0?1|0?2|0?3)[^0-9] ?(?![XYZUVW]).*(?:\(|$)/g;
+        const hoverMessage = 'Missing direction XYZUVW';
+        genericCheck(regex, hoverMessage, rangesToDecorate);
+    }
+
+    function check_missingGCode(rangesToDecorate: vscode.DecorationOptions[]) {
+        const regex = /^[XYZUV].*|^W(?!HILE).*/gm;
+        const hoverMessage = 'Missing G-code at line start';
         genericCheck(regex, hoverMessage, rangesToDecorate);
     }
 
@@ -156,8 +192,8 @@ export function activate(context: ExtensionContext) {
         let match = regexIdVariable.exec(text);
         let firstLineNumber = null;
         while (match) {
-            const re = new RegExp(String.raw`N ?${match[1]}(?:$|\s)`, 'g');
-            const nmatch = re.exec(text);
+            const reMatch = new RegExp(String.raw`N ?${match[1]}(?:$|\s)`, 'g');
+            const nmatch = reMatch.exec(text);
             if (nmatch == null) {
                 if (firstLineNumber == null) {
                     firstLineNumber = activeEditor.document.positionAt(match.index).line + 1;
@@ -173,6 +209,50 @@ export function activate(context: ExtensionContext) {
                 rangesToDecorate.push(decoration);
             }
             match = regexIdVariable.exec(text);
+        }
+    }
+
+    function check_doNumbers(rangesToDecorate: vscode.DecorationOptions[]) {
+        const regex = /DO ?(\d+)/g;
+        const hoverMessage = 'DO missing corresponding END number';
+        if (!activeEditor) {
+            return;
+        }
+        const text = activeEditor.document.getText();
+        const regexIdVariable = regex;
+        let match;
+        let firstLineNumber = null;
+        while ((match = regexIdVariable.exec(text)) !== null) {
+            const followingText = text.slice(match.index + match[0].length);
+            const reMatch = new RegExp(String.raw`END ?${match[1]}(?:$|\s)`, 'g');
+            const nmatch = reMatch.exec(followingText);
+            let hasError = false;
+            // No END match was found - this is a problem and report it
+            if (nmatch == null) {
+                hasError = true;
+            } else {
+                // Check that there isn't a matchin DO statement before the found END
+                const intermediateText = followingText.substring(0, nmatch.index);
+                const recheckIdVariable = new RegExp(String.raw`DO ?${match[1]}(?:$|\s)`, 'g');
+                const rematch = recheckIdVariable.exec(intermediateText);
+                if (rematch != null) {
+                    hasError = true;
+                }
+            }
+            if (hasError) {
+                if (firstLineNumber == null) {
+                    firstLineNumber = activeEditor.document.positionAt(match.index).line + 1;
+                }
+                const startPos = activeEditor.document.positionAt(match.index);
+                const endPos = activeEditor.document.positionAt(match.index + match[0].length);
+                const decoration = {
+                    range: new vscode.Range(startPos, endPos),
+                    hoverMessage: hoverMessage
+                        .replace(/\$\{match\[1\]\}/g, match[1])
+                        .replace(/\$\{match\[2\]\}/g, match[2]), // e.g. `An ID of 0 would evaluate to falsy. Consider: ${match[1]} != null`
+                };
+                rangesToDecorate.push(decoration);
+            }
         }
     }
 }

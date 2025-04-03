@@ -407,6 +407,54 @@
                 }
             }
         },
+        "G87": {
+            "category": "motion",
+            "shortDesc": "Cross cycle drilling",
+            "desc": "Equal Pitch Thread Cutting and Continuous Thread Cutting",
+            "modal": true,
+            "parameters": {
+                "X": {
+                    "shortDesc": "Depth of hole (absolute).",
+                    "optional": true
+                },
+                "Y": {
+                    "shortDesc": "Y Coordinate of hole (absolute).",
+                    "optional": true
+                },
+                "Z": {
+                    "shortDesc": "Z Coordinate of hole (absolute).",
+                    "optional": true
+                },
+                "U": {
+                    "shortDesc": "Depth of hole (relative).",
+                    "optional": true
+                },
+                "V": {
+                    "shortDesc": "Y Coordinate of hole (relative).",
+                    "optional": true
+                },
+                "W": {
+                    "shortDesc": "Z Coordinate of hole (relative).",
+                    "optional": true
+                },
+                "F": {
+                    "shortDesc": "Feed rate",
+                    "optional": true
+                },
+                "R": {
+                    "shortDesc": "Retract value",
+                    "optional": true
+                },
+                "P": {
+                    "shortDesc": "Dwell time at bottom of hole",
+                    "optional": true
+                },
+                "Q": {
+                    "shortDesc": "Depth of each peck",
+                    "optional": true
+                }
+            }
+        },
         "G96": {
             "category": "other",
             "shortDesc": "Starts constant surface speed control",
