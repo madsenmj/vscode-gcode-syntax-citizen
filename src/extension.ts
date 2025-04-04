@@ -92,7 +92,9 @@ export function activate(context: ExtensionContext) {
         }
         const rangesToDecorate: vscode.DecorationOptions[] = [];
         check_todoComment(rangesToDecorate);
+        check_lineDoesNotEndInLetter(rangesToDecorate);
         check_gotoHasNumber(rangesToDecorate);
+        check_doHasNumber(rangesToDecorate);
         check_gotoNumbers(rangesToDecorate);
         check_g23HaveRadius(rangesToDecorate);
         check_ifHasGoto(rangesToDecorate);
@@ -101,6 +103,8 @@ export function activate(context: ExtensionContext) {
         check_gFollowedByDirection(rangesToDecorate);
         check_missingGCode(rangesToDecorate);
         check_doNumbers(rangesToDecorate);
+        check_variableLineMissingEquals(rangesToDecorate);
+        check_toolHasOffset(rangesToDecorate);
         activeEditor.setDecorations(decorationType, rangesToDecorate);
     }
 
@@ -110,8 +114,20 @@ export function activate(context: ExtensionContext) {
         genericCheck(regex, hoverMessage, rangesToDecorate);
     }
 
+    function check_lineDoesNotEndInLetter(rangesToDecorate: vscode.DecorationOptions[]) {
+        const regex = /.*?[a-zA-z](?:$|$|\b\(| \()/gm;
+        const hoverMessage = 'Lines do not end with a letter';
+        genericCheck(regex, hoverMessage, rangesToDecorate);
+    }
+
     function check_gotoHasNumber(rangesToDecorate: vscode.DecorationOptions[]) {
         const regex = /(?<!\()\bGOTO[ \n\b\s]?[^\d ]\b(?![\)])/g;
+        const hoverMessage = 'GOTO no target number given';
+        genericCheck(regex, hoverMessage, rangesToDecorate);
+    }
+
+    function check_doHasNumber(rangesToDecorate: vscode.DecorationOptions[]) {
+        const regex = /(?<!\()\bDO[ \n\b\s]?[^\d ]\b(?![\)])/g;
         const hoverMessage = 'GOTO no target number given';
         genericCheck(regex, hoverMessage, rangesToDecorate);
     }
@@ -152,6 +168,12 @@ export function activate(context: ExtensionContext) {
         genericCheck(regex, hoverMessage, rangesToDecorate);
     }
 
+    function check_variableLineMissingEquals(rangesToDecorate: vscode.DecorationOptions[]) {
+        const regex = /^#\d+(?!.*=.*$)/gm;
+        const hoverMessage = 'Variable line must have =';
+        genericCheck(regex, hoverMessage, rangesToDecorate);
+    }
+
     function genericCheck(
         regex: RegExp = /^$/,
         hoverMessage: string = '',
@@ -160,7 +182,7 @@ export function activate(context: ExtensionContext) {
         if (!activeEditor) {
             return;
         }
-        const text = activeEditor.document.getText();
+        const text = getProgramCode(activeEditor);
         const regexIdVariable = regex; // e.g. /if ?\(([^=)]*[iI][dD](?!\.)\b) ?[^=<>\r\n]*?\)/g;
         let match = regexIdVariable.exec(text);
         let firstLineNumber = null;
@@ -187,7 +209,7 @@ export function activate(context: ExtensionContext) {
         if (!activeEditor) {
             return;
         }
-        const text = activeEditor.document.getText();
+        const text = getProgramCode(activeEditor);
         const regexIdVariable = regex;
         let match = regexIdVariable.exec(text);
         let firstLineNumber = null;
@@ -218,7 +240,7 @@ export function activate(context: ExtensionContext) {
         if (!activeEditor) {
             return;
         }
-        const text = activeEditor.document.getText();
+        const text = getProgramCode(activeEditor);
         const regexIdVariable = regex;
         let match;
         let firstLineNumber = null;
@@ -254,6 +276,52 @@ export function activate(context: ExtensionContext) {
                 rangesToDecorate.push(decoration);
             }
         }
+    }
+    function check_toolHasOffset(rangesToDecorate: vscode.DecorationOptions[]) {
+        // Does not match T3000 - that is a special case
+        const regex = /^T(?!3000)0?\d\d?00[\s\S]*?(?=$)(?:(?:\r?\n.*){0,3})/gm;
+        const hoverMessage = 'Tool missing initial offset';
+        if (!activeEditor) {
+            return;
+        }
+        const text = getProgramCode(activeEditor);
+        const regexIdVariable = regex;
+        let match = regexIdVariable.exec(text);
+        let firstLineNumber = null;
+        while (match) {
+            const reMatch = /T[1-9][0-9]?$/gm;
+            const nmatch = reMatch.exec(match[0]);
+            if (nmatch == null) {
+                if (firstLineNumber == null) {
+                    firstLineNumber = activeEditor.document.positionAt(match.index).line + 1;
+                }
+                const startPos = activeEditor.document.positionAt(match.index);
+                const endPos = activeEditor.document.positionAt(match.index + match[0].length);
+                const decoration = {
+                    range: new vscode.Range(startPos, endPos),
+                    hoverMessage: hoverMessage
+                        .replace(/\$\{match\[1\]\}/g, match[1])
+                        .replace(/\$\{match\[2\]\}/g, match[2]), // e.g. `An ID of 0 would evaluate to falsy. Consider: ${match[1]} != null`
+                };
+                rangesToDecorate.push(decoration);
+            }
+            match = regexIdVariable.exec(text);
+        }
+    }
+
+    function getProgramCode(activeEditor: vscode.TextEditor): string {
+        // Returns text before the $0 (special codes after that)
+        const regex = /\$0$/gm;
+        const text = activeEditor.document.getText();
+        const regexIdVariable = regex; // e.g. /if ?\(([^=)]*[iI][dD](?!\.)\b) ?[^=<>\r\n]*?\)/g;
+        const match = regexIdVariable.exec(text);
+        let subText;
+        if (match) {
+            subText = text.substring(0, match.index);
+        } else {
+            subText = text;
+        }
+        return subText;
     }
 }
 
