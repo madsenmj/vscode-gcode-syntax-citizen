@@ -115,7 +115,7 @@ export function activate(context: ExtensionContext) {
     }
 
     function check_lineDoesNotEndInLetter(rangesToDecorate: vscode.DecorationOptions[]) {
-        const regex = /.*?[a-zA-z](?:$|$|\b\(| \()/gm;
+        const regex = /.*?[A-Za-z](?:$|$|\b\(| \()/gm;
         const hoverMessage = 'Lines do not end with a letter';
         genericCheck(regex, hoverMessage, rangesToDecorate);
     }
